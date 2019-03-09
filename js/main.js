@@ -143,7 +143,7 @@ function DragTest(canvas){
               	 nowState = MODE_CUBE; 
               }
 		  };
-		  canvas.ontouchstart = function(ev){
+		  document.ontouchstart = function(ev){
 		  	  that.dx = 0;
 		  	   that.dy = 0;
 	          if(hit == true){
@@ -155,8 +155,8 @@ function DragTest(canvas){
 	          else
 	            nowState = MODE_WORLD;
 		  };
-		  canvas.ontouchend = function(ev){
-		  	  that.dx = 0;
+		  document.ontouchend = function(ev){
+		  	     that.dx = 0;
 		  	     that.dy = 0;  
 		  	     
 	           if(nowState == MODE_CUBE)
@@ -164,7 +164,7 @@ function DragTest(canvas){
 	           else
 	              nowState = MODE_NORMAL;
 		  };
-		  canvas.ontouchmove = function(ev){
+		  document.ontouchmove = function(ev){
 		  	   that.dx = ev.clientX - that.px;
 		  	  that.dy = ev.clientY - that.py;  
               that.px = ev.clientX;
