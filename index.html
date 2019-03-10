@@ -29,16 +29,21 @@
 	uniform mat4 u_Rotate;
 	uniform float u_Hit;  
 	    
-    varying vec4 v_Color;      
+    varying vec4 v_Color; 
+    varying vec4 v_Pos;
+    varying vec3 v_Normal;
 	void main(void){  
 		         
-		a_Normal;            
-		a_Color;
-		gl_Position = u_MvpMatrix * u_Rotate * vec4(a_Position * 1.0, 1.0);
-	  //  v_Color = a_Color;
+	           
+		a_Color; 
+		vec4 v_Pos = u_Rotate * vec4(a_Position, 1.0); 
+		v_Normal =vec3(u_Rotate * vec4(a_Normal, 1.0)); 
+		gl_Position = u_MvpMatrix * v_Pos;
+	 
 	    if(u_Hit == 0.0)
 	     	v_Color = a_Color; 
-	                          
+	    else
+	        v_Color = vec4(1.0, 1.0, 1.0, 1.0);
 	}             
 </script>              
  
@@ -47,16 +52,22 @@
 		precision mediump float; 
 	#endif     
              
-	varying vec4 v_Color;                  
-	void main(void){  
-	   
-	 	gl_FragColor = v_Color;
+	varying vec4 v_Color;   
+	varying vec4 v_Pos;
+	varying vec3 v_Normal;
+	void main(void){   
+		vec3 light = vec3(10.0, 15.0, 5.0);
+		float diffuse = max(0.0, dot(light, v_Normal));
+		
+	  	gl_FragColor = vec4(v_Color.xyz * (diffuse * 0.5 + 0.5), 1.0);
+	  	
+	  //  gl_FragColor = vec4(v_Normal, 1.0); 
 	}      
-</script>      
+</script>       
                                       
                
 <canvas id = "canvas"></canvas>
-<script type="text/ecmascript" src = "js/vector.js"></script>
+<script type="text/javascript" src = "js/vector.js"></script>
 <script type="text/javascript" src="js/3Dtest.js" ></script>
 <script type="text/javascript" src = "js/Matrix.js" ></script>
 <script type="text/javascript" src="js/Tool.js" ></script>
