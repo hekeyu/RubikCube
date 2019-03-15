@@ -58,7 +58,7 @@ function tickTest(){
             moveY += dragtest.py - LastY;
             LastX = dragtest.px;
             LastY = dragtest.py;
-            y = Math.max(Math.min(moveY, 90.0), -90); 
+            moveY = Math.max(Math.min(moveY, 90.0), -90); 
     		rotate = multiply(rotateY(-moveX), rotateX(-moveY));
     		mvpMatrix = multiply(rotate, vpMatrix);
 			  ray.update(rotate);
