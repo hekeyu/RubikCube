@@ -1,4 +1,4 @@
-var canvas = document.getElementById("canvas");
+﻿var canvas = document.getElementById("canvas");
 var gl = canvas.getContext('webgl');
 canvas.width =  window.innerWidth;
 canvas.height = window.innerHeight;
@@ -139,8 +139,8 @@ function DragTest(canvas){
               that.px = ev.clientX;
               that.py = ev.clientY;
               if(nowState == MODE_MOVE){   //进入下一个状态前确定旋转方向
-              	
-              	 nowState = MODE_CUBE; 
+              	if(that.dx != 0 || that.dy != 0) 
+              	 	nowState = MODE_CUBE; 
               }
 		  };
 	 
