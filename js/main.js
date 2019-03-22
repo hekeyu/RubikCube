@@ -143,6 +143,43 @@ function DragTest(canvas){
               	 	nowState = MODE_CUBE; 
               }
 		  };
+		  
+		  	  canvas.ontouchstart = function(ev){
+		  	  ev.preventDefault();
+		  	   that.dx = 0;
+		  	   that.dy = 0;
+	          if(hit == true){
+	             //算出碰撞平面 
+	            HitPlane = getHitPlane(HitPos);
+	            HitCube = getHitCube(HitPos); 
+	            nowState = MODE_MOVE;
+	           }
+	          else
+	            nowState = MODE_WORLD;
+		  };
+		  
+		  canvas.ontouchend = function(ev){
+		  	  ev.preventDefault();
+		  	   that.dx = 0;
+		  	     that.dy = 0;  
+		  	     
+	           if(nowState == MODE_CUBE)
+	              nowState = MODE_ANIMATE;
+	           else
+	              nowState = MODE_NORMAL;
+		  };
+		  
+		  canvas.ontouchmove = function(ev){
+		  	  ev.preventDefault();
+		  	   that.dx = ev.clientX - that.px;
+		  	  that.dy = ev.clientY - that.py;  
+              that.px = ev.clientX;
+              that.py = ev.clientY;
+              if(nowState == MODE_MOVE){   //进入下一个状态前确定旋转方向
+               if(that.dx != 0 || that.dy != 0) 
+              	 nowState = MODE_CUBE; 
+              }
+		  }
 	 
 };
 
